@@ -60,7 +60,6 @@ const Faq = () => {
         <Heading
           className="md:max-w-md lg:max-w-2xl"
           title="Frequently Asked Questions"
-          text="Find answers to common questions about AItomate and how it can benefit your business"
         />
 
         <div className="max-w-[848px] mx-auto mt-12 bg-n-8 rounded-2xl border border-n-6 divide-y divide-n-6">

@@ -5,13 +5,30 @@
     <link
       rel="icon"
       type="image/svg+xml"
-      href="./src/assets/askagi_prev_ui.png"
+      href="/src/assets/askAGI.svg"
     />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AItomate</title>
+   
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+    <script type="text/javascript">
+      (function(d, t) {
+          var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
+          v.onload = function() {
+            window.voiceflow.chat.load({
+              verify: { projectID: '6750bbe1c71e01f74bc2c505' },
+              url: 'https://general-runtime.voiceflow.com',
+              versionID: 'production',
+              voice: {
+                url: "https://runtime-api.voiceflow.com"
+              }
+            });
+          }
+          v.src = "https://cdn.voiceflow.com/widget-next/bundle.mjs"; v.type = "text/javascript"; s.parentNode.insertBefore(v, s);
+      })(document, 'script');
+    </script>
   </body>
 </html>

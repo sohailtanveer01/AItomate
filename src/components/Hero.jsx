@@ -1,13 +1,9 @@
-import { curve, heroBackground, robot } from "../assets";
+import { curve } from "../assets";
 import Button from "./Button";
 import Section from "./Section";
 import { BackgroundCircles, BottomLine, Gradient } from "./design/Hero";
-import { heroIcons } from "../constants";
-import { ScrollParallax } from "react-just-parallax";
 import { useRef } from "react";
-import Generating from "./Generating";
 import Notification from "./Notification";
-import CompanyLogos from "./CompanyLogos";
 import { GridBackgroundDemo } from "./design/HeroLogo";
 
 const Hero = () => {
@@ -51,19 +47,15 @@ const Hero = () => {
               <div className="aspect-[33/40] rounded-b-[0.9rem] overflow-hidden md:aspect-[688/490] lg:aspect-[1024/490]">
                 <GridBackgroundDemo />
 
-                <ScrollParallax isAbsolutelyPositioned>
-                  <Notification
-                    className="hidden absolute -left-[5.5rem] bottom-[16rem] w-[18rem] xl:flex"
-                    title="The Last AI Platform You'll Ever Need"
-                  />
-                </ScrollParallax>
+                <Notification
+                  className="hidden absolute -left-[5.5rem] bottom-[16rem] w-[18rem] xl:flex"
+                  title="The Last AI Platform You'll Ever Need"
+                />
 
-                <ScrollParallax isAbsolutelyPositioned>
-                  <Notification
-                    className="hidden absolute -right-[5.5rem] bottom-[11rem] w-[18rem] xl:flex"
-                    title="Automate Tasks with AI"
-                  />
-                </ScrollParallax>
+                <Notification
+                  className="hidden absolute -right-[5.5rem] bottom-[11rem] w-[18rem] xl:flex"
+                  title="Automate Tasks with AI"
+                />
               </div>
             </div>
 
