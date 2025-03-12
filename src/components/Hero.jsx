@@ -33,7 +33,7 @@ const Hero = () => {
             </span>
           </h1>
           <p className="body-1 max-w-3xl mx-auto mb-6 text-n-2 lg:mb-8">
-            AItomate is an enterprise-grade AGI platform designed to streamline workflows and optimize business processes
+            AItomate is an enterprise-grade platform designed to streamline workflows and optimize business processes
           </p>
           <Button href="#contact" white>
             Get started
