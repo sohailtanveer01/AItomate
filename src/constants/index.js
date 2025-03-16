@@ -10,7 +10,6 @@ import {
   file02,
   homeSmile,
   instagram,
-  linkedin,
   plusSquare,
   recording01,
   recording03,
@@ -109,14 +108,14 @@ export const benefits = [
 export const socials = [
   {
     id: "0",
-    title: "Twitter",
-    iconUrl: twitter,
+    title: "Discord",
+    iconUrl: discordBlack,
     url: "#",
   },
   {
     id: "1",
-    title: "LinkedIn",
-    iconUrl: linkedin,
+    title: "Twitter",
+    iconUrl: twitter,
     url: "#",
   },
   {
@@ -124,5 +123,17 @@ export const socials = [
     title: "Instagram",
     iconUrl: instagram,
     url: "#",
-  }
+  },
+  {
+    id: "3",
+    title: "Telegram",
+    iconUrl: telegram,
+    url: "#",
+  },
+  {
+    id: "4",
+    title: "Facebook",
+    iconUrl: facebook,
+    url: "#",
+  },
 ];

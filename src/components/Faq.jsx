@@ -28,10 +28,7 @@ const FaqItem = ({ question, answer }) => {
 
 const Faq = () => {
   const faqs = [
-    {
-      question: "What is AItomate and how can it help my business?",
-      answer: "AItomate is an enterprise-grade AI platform designed to streamline workflows and optimize business processes. It helps businesses automate routine tasks, analyze data for better decision-making, and improve operational efficiency through AI-powered solutions."
-    },
+  
     {
       question: "How secure is AItomate for handling business data?",
       answer: "AItomate implements enterprise-grade security measures including encryption, secure authentication, and compliance with industry standards. We prioritize data protection and ensure all business information is handled with the highest security protocols."
@@ -49,9 +46,11 @@ const Faq = () => {
       answer: "Implementation time varies depending on your specific needs and system complexity. Typically, basic implementation can be completed in a few weeks, while more complex enterprise-wide deployments might take 2-3 months."
     },
     {
-      question: "What makes AItomate different from other AI solutions?",
-      answer: "AItomate stands out through its enterprise-focus, comprehensive automation capabilities, advanced security features, and seamless integration options. Our platform is specifically designed for business needs with scalability and reliability in mind."
+      question: "What is the pricing ?",
+      answer: "There is no upfront fee, you can pay after we come up with a solution that is tailored for your business"
     }
+    
+   
   ];
 
   return (
