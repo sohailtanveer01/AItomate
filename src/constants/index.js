@@ -77,15 +77,24 @@ export const roadmap = [
 export const benefits = [
   {
     id: "0",
-    title: "Chat bot Development",
-    text: "Build intelligent chatbots for your business",
-    details: "Create sophisticated AI-powered chatbots tailored to your business needs and customer interactions.",
+    title: "Lead Generation",
+    text: "We help you generate leads (1000+) for your business",
+    details: "Our AI Automated systems enable you to outreach to atleast 1000+ potential leads per day with just a click of a button",
     backgroundUrl: "./src/assets/benefits/card-1.svg",
     iconUrl: benefitIcon1,
     imageUrl: "https://raw.githubusercontent.com/adrianhajdin/project_ai_mern_image_generation/main/client/src/assets/robot.png",
   },
   {
     id: "1",
+    title: "Chat bot Development",
+    text: "Build intelligent chatbots for your business",
+    details: "Create sophisticated AI-powered chatbots tailored to your business needs and customer interactions.",
+    backgroundUrl: "./src/assets/benefits/card-1.svg",
+    iconUrl: "./src/assets/benefits/chatbot_17115944.png",
+    imageUrl: "https://raw.githubusercontent.com/adrianhajdin/project_ai_mern_image_generation/main/client/src/assets/robot.png",
+  },
+  {
+    id: "2",
     title: "Business Automation",
     text: "Streamline reduntant tasks with AI",
     details: "AI-driven automation to optimize workflows, reduce manual effort, and enhance efficiency. Implement smart solutions to handle repetitive tasks, allowing your team to focus on strategic growth and innovation",
@@ -95,7 +104,7 @@ export const benefits = [
     light: true,
   },
   {
-    id: "2",
+    id: "3",
     title: "Lead Capture and CRM integration",
     text: "AI agents to capture leads automatically and integrate into CRM systems",
     details: "Automate lead capture with AI-powered agents that engage prospects, collect key information, and seamlessly integrate data into your CRM system",
