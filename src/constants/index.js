@@ -2,7 +2,9 @@ import {
   benefitIcon1,
   benefitIcon2,
   benefitIcon3,
+  benefitIcon4,
   benefitImage2,
+
   chromecast,
   disc02,
   discordBlack,
@@ -90,7 +92,7 @@ export const benefits = [
     text: "Build intelligent chatbots for your business",
     details: "Create sophisticated AI-powered chatbots tailored to your business needs and customer interactions.",
     backgroundUrl: "./src/assets/benefits/card-1.svg",
-    iconUrl: "./src/assets/benefits/chatbot (1).png",
+    iconUrl: benefitIcon2,
     imageUrl: "https://raw.githubusercontent.com/adrianhajdin/project_ai_mern_image_generation/main/client/src/assets/robot.png",
   },
   {
@@ -98,8 +100,8 @@ export const benefits = [
     title: "Business Automation",
     text: "Streamline reduntant tasks with AI",
     details: "AI-driven automation to optimize workflows, reduce manual effort, and enhance efficiency. Implement smart solutions to handle repetitive tasks, allowing your team to focus on strategic growth and innovation",
+    iconUrl: benefitIcon3,
     backgroundUrl: "./src/assets/benefits/card-2.svg",
-    iconUrl: "./src/assets/benefits/web-programming.png",
     imageUrl: benefitImage2,
     light: true,
   },
@@ -109,7 +111,7 @@ export const benefits = [
     text: "AI agents to capture leads automatically and integrate into CRM systems",
     details: "Automate lead capture with AI-powered agents that engage prospects, collect key information, and seamlessly integrate data into your CRM system",
     backgroundUrl: "./src/assets/benefits/card-3.svg",
-    iconUrl: benefitIcon3,
+    iconUrl: benefitIcon4,
     imageUrl: benefitImage2,
   }
 ];

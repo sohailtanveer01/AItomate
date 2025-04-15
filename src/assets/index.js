@@ -30,8 +30,10 @@ import benefitCard1 from "./benefits/card-1.svg";
 import benefitCard2 from "./benefits/card-2.svg";
 import benefitCard3 from "./benefits/card-3.svg";
 import benefitIcon1 from "./benefits/icon-1.svg";
-import benefitIcon2 from "./benefits/icon-2.svg";
-import benefitIcon3 from "./benefits/icon-3.svg";
+import benefitIcon2 from "./benefits/chatbot (1).png";
+import benefitIcon3 from "./benefits/web-programming.png";
+import benefitIcon4 from "./benefits/icon-3.svg";
+
 import benefitImage2 from "./benefits/image-2.png";
 
 import discordBlack from "./socials/discord.svg";
@@ -73,6 +75,7 @@ export {
   benefitIcon2,
   benefitIcon3,
   benefitImage2,
+  benefitIcon4,
   discordBlack,
   facebook,
   instagram,
