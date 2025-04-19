@@ -8,7 +8,7 @@ import Hero from "./components/Hero";
 import Services from "./components/Services";
 
 const App = () => {
-  window.addEventListener("contextmenu", (e)=>e.preventDefault())
+  // window.addEventListener("contextmenu", (e)=>e.preventDefault())
   return (
     <>
       <div className="pt-[4.75rem] lg:pt-[5.25rem] overflow-hidden">
