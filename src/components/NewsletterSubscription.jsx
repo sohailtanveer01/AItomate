@@ -91,8 +91,8 @@ const NewsletterSubscription = () => {
         .insert([{ 
           email: sanitizedEmail,
           subscribed_at: new Date().toISOString(),
-          ip_address: null, // IP address will be handled by Supabase
-          user_agent: navigator.userAgent
+          // ip_address: null, // IP address will be handled by Supabase
+          // user_agent: navigator.userAgent
         }]);
 
       if (error) throw error;
