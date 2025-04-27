@@ -106,14 +106,14 @@ const NewsletterSubscription = () => {
             <h1 style="color: #333;">Welcome to Our Newsletter!</h1>
             <p style="color: #555; line-height: 1.6;">
               Thank you for subscribing to our daily AI updates and new AI tools newsletter.
-              Stay tuned for the latest insights, tools, and innovations in the AI world!
+              Stay tuned for the latest insights, tools, and innovations in AI.
             </p>
             <p style="color: #555; line-height: 1.6;">
               If you have any questions or feedback, feel free to reply to this email.
             </p>
             <p style="color: #555; line-height: 1.6;">
               Best regards,<br />
-              The AI Updates Team
+              AItomates
             </p>
             <p style="font-size: 12px; color: #999; text-align: center; margin-top: 20px;">
               <a href="https://yourdomain.com/unsubscribe" style="color: #999;">Unsubscribe</a>
