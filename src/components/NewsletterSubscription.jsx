@@ -17,6 +17,7 @@ const NewsletterSubscription = () => {
 
   // Supabase Edge Function URL
   const API_URL = import.meta.env.VITE_SUPABASE_API_URL
+  const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY
 
   useEffect(() => {
     // Reset attempts after rate limit period
@@ -78,6 +79,7 @@ const NewsletterSubscription = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
         },
         body: JSON.stringify({ email }),
       });
