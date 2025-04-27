@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { createClient } from '@supabase/supabase-js';
+import { Resend } from 'resend';
 
+// Initialize Supabase client
 const supabase = createClient(
   import.meta.env.VITE_SUPABASE_URL,
   import.meta.env.VITE_SUPABASE_ANON_KEY
 );
+
+// Initialize Resend client
+const resend = new Resend(import.meta.env.VITE_RESEND_API_KEY);
 
 // Email validation regex
 const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -77,25 +82,45 @@ const NewsletterSubscription = () => {
     setStatus('');
 
     try {
-      // Add CSRF token if you have one
-      const headers = {
-        'Content-Type': 'application/json',
-        // 'X-CSRF-Token': getCsrfToken(), // Uncomment if you implement CSRF protection
-      };
-
       // Sanitize email input
       const sanitizedEmail = email.trim().toLowerCase();
 
-      const { error } = await supabase
+      // Insert subscriber into Supabase
+      const { error: dbError } = await supabase
         .from('subscribers')
         .insert([{ 
           email: sanitizedEmail,
-          subscribed_at: new Date().toISOString(),
-          // ip_address: null, // IP address will be handled by Supabase
+          // subscribed_at: new Date().toISOString(),
           // user_agent: navigator.userAgent
         }]);
 
-      if (error) throw error;
+      if (dbError) throw new Error(`Database error: ${dbError.message}`);
+
+      // Send welcome email via Resend
+      await resend.emails.send({
+        from: 'Newsletter <newsletter@aitomates.com>',
+        to: sanitizedEmail,
+        subject: 'Welcome to Our Daily AI Newsletter!',
+        html: `
+          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+            <h1 style="color: #333;">Welcome to Our Newsletter!</h1>
+            <p style="color: #555; line-height: 1.6;">
+              Thank you for subscribing to our daily AI updates and new AI tools newsletter.
+              Stay tuned for the latest insights, tools, and innovations in the AI world!
+            </p>
+            <p style="color: #555; line-height: 1.6;">
+              If you have any questions or feedback, feel free to reply to this email.
+            </p>
+            <p style="color: #555; line-height: 1.6;">
+              Best regards,<br />
+              The AI Updates Team
+            </p>
+            <p style="font-size: 12px; color: #999; text-align: center; margin-top: 20px;">
+              <a href="https://yourdomain.com/unsubscribe" style="color: #999;">Unsubscribe</a>
+            </p>
+          </div>
+        `,
+      });
 
       setStatus('success');
       setEmail('');
@@ -104,7 +129,7 @@ const NewsletterSubscription = () => {
       setLastAttemptTime(null);
     } catch (error) {
       console.error('Error:', error);
-      setStatus('error');
+      setStatus(error.message.includes('Database') ? 'dbError' : 'emailError');
       setAttempts(prev => prev + 1);
       setLastAttemptTime(Date.now());
     } finally {
@@ -115,9 +140,11 @@ const NewsletterSubscription = () => {
   const getStatusMessage = () => {
     switch (status) {
       case 'success':
-        return { text: 'Thank you for subscribing!', class: 'text-color-4' };
-      case 'error':
-        return { text: 'Something went wrong. Please try again.', class: 'text-color-3' };
+        return { text: 'Thank you for subscribing! Check your email for a welcome message.', class: 'text-color-4' };
+      case 'dbError':
+        return { text: 'Failed to save your subscription. Please try again.', class: 'text-color-3' };
+      case 'emailError':
+        return { text: 'Subscription saved, but failed to send welcome email. Please check your inbox later.', class: 'text-color-3' };
       case 'validation':
         return { text: validateEmail(email), class: 'text-color-3' };
       case 'rateLimit':
