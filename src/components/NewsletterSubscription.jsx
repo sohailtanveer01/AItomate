@@ -1,15 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { createClient } from '@supabase/supabase-js';
-import { Resend } from 'resend';
-
-// Initialize Supabase client
-const supabase = createClient(
-  import.meta.env.VITE_SUPABASE_URL,
-  import.meta.env.VITE_SUPABASE_ANON_KEY
-);
-
-// Initialize Resend client
-const resend = new Resend(import.meta.env.VITE_RESEND_API_KEY);
 
 // Email validation regex
 const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -25,6 +14,9 @@ const NewsletterSubscription = () => {
   const [loading, setLoading] = useState(false);
   const [attempts, setAttempts] = useState(0);
   const [lastAttemptTime, setLastAttemptTime] = useState(null);
+
+  // Supabase Edge Function URL
+  const API_URL = import.meta.env.VITE_SUPABASE_API_URL
 
   useEffect(() => {
     // Reset attempts after rate limit period
@@ -73,7 +65,7 @@ const NewsletterSubscription = () => {
     const validationError = validateEmail(email);
     if (validationError) {
       setStatus('validation');
-      setAttempts(prev => prev + 1);
+      setAttempts((prev) => prev + 1);
       setLastAttemptTime(Date.now());
       return;
     }
@@ -82,45 +74,19 @@ const NewsletterSubscription = () => {
     setStatus('');
 
     try {
-      // Sanitize email input
-      const sanitizedEmail = email.trim().toLowerCase();
-
-      // Insert subscriber into Supabase
-      const { error: dbError } = await supabase
-        .from('subscribers')
-        .insert([{ 
-          email: sanitizedEmail,
-          // subscribed_at: new Date().toISOString(),
-          // user_agent: navigator.userAgent
-        }]);
-
-      if (dbError) throw new Error(`Database error: ${dbError.message}`);
-
-      // Send welcome email via Resend
-      await resend.emails.send({
-        from: 'Newsletter <newsletter@aitomates.com>',
-        to: sanitizedEmail,
-        subject: 'Welcome to Our Daily AI Newsletter!',
-        html: `
-          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-            <h1 style="color: #333;">Welcome to Our Newsletter!</h1>
-            <p style="color: #555; line-height: 1.6;">
-              Thank you for subscribing to our daily AI updates and new AI tools newsletter.
-              Stay tuned for the latest insights, tools, and innovations in AI.
-            </p>
-            <p style="color: #555; line-height: 1.6;">
-              If you have any questions or feedback, feel free to reply to this email.
-            </p>
-            <p style="color: #555; line-height: 1.6;">
-              Best regards,<br />
-              AItomates
-            </p>
-            <p style="font-size: 12px; color: #999; text-align: center; margin-top: 20px;">
-              <a href="https://yourdomain.com/unsubscribe" style="color: #999;">Unsubscribe</a>
-            </p>
-          </div>
-        `,
+      const response = await fetch(API_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
       });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Something went wrong');
+      }
 
       setStatus('success');
       setEmail('');
@@ -129,8 +95,8 @@ const NewsletterSubscription = () => {
       setLastAttemptTime(null);
     } catch (error) {
       console.error('Error:', error);
-      setStatus(error.message.includes('Database') ? 'dbError' : 'emailError');
-      setAttempts(prev => prev + 1);
+      setStatus('error');
+      setAttempts((prev) => prev + 1);
       setLastAttemptTime(Date.now());
     } finally {
       setLoading(false);
@@ -141,16 +107,14 @@ const NewsletterSubscription = () => {
     switch (status) {
       case 'success':
         return { text: 'Thank you for subscribing! Check your email for a welcome message.', class: 'text-color-4' };
-      case 'dbError':
-        return { text: 'Failed to save your subscription. Please try again.', class: 'text-color-3' };
-      case 'emailError':
-        return { text: 'Subscription saved, but failed to send welcome email. Please check your inbox later.', class: 'text-color-3' };
+      case 'error':
+        return { text: 'Something went wrong. Please try again.', class: 'text-color-3' };
       case 'validation':
         return { text: validateEmail(email), class: 'text-color-3' };
       case 'rateLimit':
-        return { 
+        return {
           text: `Too many attempts. Please try again in ${RATE_LIMIT_MINUTES} minutes.`,
-          class: 'text-color-3'
+          class: 'text-color-3',
         };
       default:
         return null;
@@ -161,7 +125,7 @@ const NewsletterSubscription = () => {
     <div className="mt-10 w-full max-w-[38rem] mx-auto">
       <h3 className="text-2xl font-semibold text-center mb-4">Subscribe to Our Daily Newsletter</h3>
       <p className="text-n-4 text-center mb-6">Stay updated with latest AI Updates and New AI Tools</p>
-      
+
       <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4">
         <input
           type="email"
