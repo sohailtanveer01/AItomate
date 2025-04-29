@@ -17,7 +17,7 @@ const Contact = () => {
         <div className="flex flex-col items-center">
           <div className="w-full max-w-[950px] h-[700px] rounded-2xl overflow-hidden bg-n-8/40 backdrop-blur border border-n-6">
             <InlineWidget
-              url="https://calendly.com/devfolio1/30min"
+              url="https://calendly.com/sohail-aitomates/30min"
               styles={{
                 height: '100%',
                 width: '100%',
